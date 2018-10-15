@@ -601,6 +601,10 @@ input::placeholder {
     Everything form related here
 */
 
+.c-form-field {
+    position: relative;
+}
+
 .c-form-field--option {
     display: -webkit-flex;
     display: -ms-flex;
@@ -647,6 +651,12 @@ input::placeholder {
     box-shadow: var(--focus-shadow);
 }
 
+.c-input:focus + .c-label--floating {
+    -webkit-transform: translateY(-24px);
+    -ms-transform: translateY(-24px);
+    transform: translateY(-24px);
+}
+
 /*
 Input password with toggle checkbox on top of it needs
 more padding on the right to avoid overlap
@@ -676,12 +686,113 @@ more padding on the right to avoid overlap
     color: var(--color-neutral-x-dark);
 }
 
+.c-label--floating {
+    position: absolute;
+
+    top: 12px;
+
+    left: 8px;
+
+    padding: 4px 8px;
+
+    will-change: transform;
+
+    transform: translateY( 0 );
+
+    transition: transform 200ms ease-in-out;
+
+    box-shadow: 0 0 4px 4px rgba(255,255,255,0.8);
+
+    background: white;
+}
+
+.is-floating + .c-label--floating {
+    -webkit-transform: translateY(-24px);
+    -ms-transform: translateY(-24px);
+    transform: translateY(-24px);
+}
+
 /*
     Component: Dropdown Button
     ---
     Class to put on form buttons or
 */
 
+.c-dropdown {
+    display: block;
+    position: relative;
+}
+
+.c-dropdown__input {
+    position: relative;
+    text-align: left;
+    width: 120px;
+}
+
+.c-dropdown__symbol {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  pointer-events: none;
+  fill: var(--color-neutral-x-light);
+
+  -webkit-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
+  transition: transform 0.5s;
+}
+
+.c-dropdown__symbol--meta {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    pointer-events: none;
+    fill: var(--color-neutral-x-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.js-dropdown-input .c-dropdown__symbol {
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  fill: var(--color-neurtral-dark);
+}
+
+.c-dropdown__list {
+  transform: scale(0);
+  transition: transform 200ms ease-in-out;
+  transform-origin: center top;
+
+  position: absolute;
+  top: 48px;
+  width: 120px;
+
+}
+
+.js-dropdown-input + .c-dropdown__list {
+  transform: scale(1);
+}
+
+.c-dropdown__button {
+  text-align: left;
+  width: 120px;
+  position: relative;
+}
+
+.c-dropdown__button-symbol {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  pointer-events: none;
+  fill: var(--color-neutral-x-light);
+}
 
 
 /*
@@ -965,6 +1076,37 @@ Component: Password Toggle
 Password toggle custom checkbox
 */
 
+.c-password-toggle {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    height: 24px;
+    width: 24px;
+}
+
+.c-password-toggle-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.c-password-toggle__label {
+
+}
+
+.c-password-toggle__symbol {
+    position: absolute;
+    fill: var(--color-neutral-xx-light);
+}
+
+.c-password-toggle__symbol--show {
+    visibility: visible;
+}
+
+.c-password-toggle__symbol--hide {
+    visibility: hidden;
+}
+
 
 /*
 	Component: Custom Like
@@ -972,6 +1114,103 @@ Password toggle custom checkbox
 	Custom like button
 */
 
+/*
+	Component: Custom Like
+	---
+	Custom like button
+*/
+
+.c-like__label {
+  width: 24px;
+  height: 24px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-like__symbol {
+  width: 100%;
+  height: 100%;
+  /* fill: #D80027; */
+  fill: grey;
+}
+
+.c-like__symbol:active {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  width: 15px;
+  height: 15px;
+}
+
+.c-like__symbol:active {
+    fill: #D80027;
+}
+
+@-webkit-keyframes bounce {
+  0%, 20%, 50% {width: 100%;}
+  40% {width: 70%;}
+  60% {width: 90%;}
+  100% {width: 80%;}
+}
+
+@keyframes bounce {
+  0%, 20%, 50% {width: 100%;}
+  40% {width: 70%;}
+  60% {width: 90%;}
+  100% {width: 80%;}
+}
+
+/*
+	Component: Custom range slider
+*/
+
+.c-range {
+    display: block;
+    height: 8px;
+    padding: 0;
+    border-radius: 8px;
+    background-color: var(--color-neutral-xxxx-light);
+    border: 1px solid var(--color-neutral-xxx-light);
+}
+
+.c-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 8px;
+    background: var(--color-alpha );
+}
+
+.c-range-holder {
+    max-width: calc( 100% - 18px );
+    background-color: var(--color-neutral-xxxx-light);
+    display: inline-block;
+    margin-top: 12px;
+    border-radius: 4px;
+    transform: scale(0);
+    transition: transform 200ms ease-in-out;
+    transform-origin: center top;
+}
+
+.c-range-holder::after {
+    content: attr(data-value);
+    display: inline-block;
+    width: 32px;
+    padding: 4px;
+    font-size: .8rem;
+    text-align: center;
+    border-radius: 4px;
+    background: var( --color-neutral-xxxx-light );
+}
+
+.c-range:focus + .c-range-holder {
+    transform: scale(1);
+}
 
 /*------------------------------------*\
 #UTILITIES
